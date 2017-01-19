@@ -8,7 +8,7 @@ Besides spawning child processes, using web workers, etc it makes sense to avoid
 The async implementations here work similar to underscore's implementations,    
 but accept a callback or return a promise alternatively:
 
-```(javascript)
+```javascript
 async.each(collection, iterator, callback)
 async.map(collection, iterator)
   .then((result) => console.log(result))
