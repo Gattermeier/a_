@@ -44,8 +44,16 @@ async.reduce(collection, reducer)
 
 ### Every
 ```javascript
-async.every(collection, everyIterator, callback)
-async.every(collection, everyIterator)
+async.every(collection, test, callback)
+async.every(collection, test)
+  .then((result) => console.log(result))
+  .catch((err) => console.error(err))
+```
+
+### Some
+```javascript
+async.some(collection, test, callback)
+async.some(collection, test)
   .then((result) => console.log(result))
   .catch((err) => console.error(err))
 ```
