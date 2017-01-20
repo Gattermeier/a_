@@ -8,9 +8,32 @@ Besides spawning child processes, using web workers, etc it makes sense to avoid
 The async implementations here work similar to underscore's implementations,    
 but accept a callback or return a promise alternatively:
 
+### Each
 ```javascript
 async.each(collection, iterator, callback)
+async.each(collection, iterator)
+```
+
+### Map
+```javascript
+async.map(collection, iterator, callback)
 async.map(collection, iterator)
   .then((result) => console.log(result))
   .catch((err) => console.error(err))
+```
+
+### Filter
+```javascript
+async.filter(collection, test, callback)
+async.filter(collection, test)
+  .then((result) => console.log(result))
+  .catch((err) => console.error(err))
+```
+
+### Reduce
+```javascript
+async.reduce(collection, reducer, accumulator, callback)
+async.reduce(collection, reducer, accumulator)
+async.reduce(collection, reducer, callback)
+async.reduce(collection, reducer)
 ```
