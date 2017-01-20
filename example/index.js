@@ -47,8 +47,21 @@ async.reduce(collection, reducer)
 
 // EVERY
 collection = { a:1, b:2, c:3, e:5 }
-everyIterator = (value) => Number.isInteger(value)
-
+const everyIterator = (value) => Number.isInteger(value)
 async.every(collection, everyIterator, (result) => console.log('Every callback return', result))
+
+// fail
+collection = { a:1, b:2, c:3, e:'str' }
 async.every(collection, everyIterator)
   .then((result) => console.log('Every promise return', result))
+  .catch((error) => console.error(error))
+
+// SOME
+const someIterator = everyIterator
+async.some(collection, someIterator)
+  .then((result) => console.log('Some promise return', result))
+  .catch((error) => console.error(error))
+
+// fail
+collection = { e:'str' }
+async.some(collection, someIterator, (result) => console.log('Some callback return', result))
