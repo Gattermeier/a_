@@ -12,6 +12,9 @@ but accept a callback or return a promise alternatively:
 ```javascript
 async.each(collection, iterator, callback)
 async.each(collection, iterator)
+async.filter(collection, test)
+  .then((result) => console.log(result))
+  .catch((err) => console.error(err))
 ```
 
 ### Map
