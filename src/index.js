@@ -16,88 +16,104 @@
 
  */
 
+const async = {}
 
-const async = {
-  each: (collection, iterator, callback) => {
-    return new Promise((resolve, reject) => {
-      if (Array.isArray(collection)) {
-        let i = 0
-        function iter() {
-          if (i < collection.length) {
-            try {
-              iterator(collection[i], i, collection)
-            } catch(e) {
-              reject(e)
-            }
-            i++
-            setImmediate(iter)
-          } else resolve();
-        }
-        iter();
-      } else {
-        let keys = Object.keys(collection)
-        function iter() {
-          if (keys.length > 0) {
-            let key = keys.shift()
-            try {
-              iterator(collection[key], key, collection)
-            } catch(e) {
-              reject(e)
-            }
-            setImmediate(iter)
-          } else resolve()
-        }
-        iter()
+async.each = (collection, iterator, callback) => {
+  return new Promise((resolve, reject) => {
+    if (Array.isArray(collection)) {
+      let i = 0
+      function iter() {
+        if (i < collection.length) {
+          try {
+            iterator(collection[i], i, collection)
+          } catch(e) {
+            reject(e)
+          }
+          i++
+          setImmediate(iter)
+        } else resolve();
       }
-
-    })
-    .then(() => (callback ? callback() : null))
-    .catch((error) => {
-      if (callback) return callback(error)
-      throw error
-    })
-  },
-  map: (collection, iterator, callback) => {
-    let results = []
-    return new Promise((resolve, reject) => {
-      if (Array.isArray(collection)) {
-        let i = 0
-        function iter() {
-          if (i < collection.length) {
-            try {
-              results.push(iterator(collection[i], i, collection))
-            } catch(e) {
-              reject(e)
-            }
-            i++
-            setImmediate(iter)
-          } else resolve(results);
-        }
-        iter();
-      } else {
-        let keys = Object.keys(collection)
-        function iter() {
-          if (keys.length > 0) {
-            let key = keys.shift()
-            try {
-              results.push(iterator(collection[key], key, collection))
-            } catch(e) {
-              reject(e)
-            }
-            setImmediate(iter)
-          } else resolve(results)
-        }
-        iter()
+      iter();
+    } else {
+      let keys = Object.keys(collection)
+      function iter() {
+        if (keys.length > 0) {
+          let key = keys.shift()
+          try {
+            iterator(collection[key], key, collection)
+          } catch(e) {
+            reject(e)
+          }
+          setImmediate(iter)
+        } else resolve()
       }
+      iter()
+    }
 
-    })
-    .then((results) => (callback ? callback(results) : results))
-    .catch((error) => {
-      if (callback) return callback(error)
-      throw error
-    })
-
-  }
+  })
+  .then(() => (callback ? callback() : null))
+  .catch((error) => {
+    if (callback) return callback(error)
+    throw error
+  })
 }
+
+
+async.filter = (collection, test, callback) => {
+  var results = []
+  return new Promise((resolve, reject) => {
+    return async.each(collection, (element) => {
+      if (test(element)) results.push(element)
+    }, () => resolve(results))
+  })
+  .then((results) => (callback ? callback(results) : results))
+  .catch((error) => {
+    if (callback) return callback(error)
+    throw error
+  })
+}
+
+async.map = (collection, iterator, callback) => {
+  let results = []
+  return new Promise((resolve, reject) => {
+    if (Array.isArray(collection)) {
+      let i = 0
+      function iter() {
+        if (i < collection.length) {
+          try {
+            results.push(iterator(collection[i], i, collection))
+          } catch(e) {
+            reject(e)
+          }
+          i++
+          setImmediate(iter)
+        } else resolve(results);
+      }
+      iter();
+    } else {
+      let keys = Object.keys(collection)
+      function iter() {
+        if (keys.length > 0) {
+          let key = keys.shift()
+          try {
+            results.push(iterator(collection[key], key, collection))
+          } catch(e) {
+            reject(e)
+          }
+          setImmediate(iter)
+        } else resolve(results)
+      }
+      iter()
+    }
+
+  })
+  .then((results) => (callback ? callback(results) : results))
+  .catch((error) => {
+    if (callback) return callback(error)
+    throw error
+  })
+
+}
+
 
 module.exports = async
