@@ -33,7 +33,11 @@ async.filter(collection, test)
 ### Reduce
 ```javascript
 async.reduce(collection, reducer, accumulator, callback)
-async.reduce(collection, reducer, accumulator)
 async.reduce(collection, reducer, callback)
+async.reduce(collection, reducer, accumulator)
+  .then((result) => console.log(result))
+  .catch((err) => console.error(err))
 async.reduce(collection, reducer)
+  .then((result) => console.log(result))
+  .catch((err) => console.error(err))
 ```
