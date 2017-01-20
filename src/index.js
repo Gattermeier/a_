@@ -18,6 +18,7 @@
 
 const async = {}
 
+// Each
 async.each = (collection, iterator, callback) => {
   return new Promise((resolve, reject) => {
     if (Array.isArray(collection)) {
@@ -58,7 +59,7 @@ async.each = (collection, iterator, callback) => {
   })
 }
 
-
+// Filter
 async.filter = (collection, test, callback) => {
   var results = []
   return new Promise((resolve, reject) => {
@@ -73,6 +74,7 @@ async.filter = (collection, test, callback) => {
   })
 }
 
+// Map
 async.map = (collection, iterator, callback) => {
   let results = []
   return new Promise((resolve, reject) => {
@@ -114,6 +116,7 @@ async.map = (collection, iterator, callback) => {
   })
 }
 
+// Reduce
 // arrow fn will not work for getting the right fn arguments
 async.reduce = function(collection, reducer, accumulator, callback) {
   var args = [...arguments];
@@ -146,6 +149,17 @@ async.reduce = function(collection, reducer, accumulator, callback) {
     }
   })
   .then(() => (callback ? callback(accumulator) : accumulator))
+  .catch((error) => {
+    if (callback) return callback(error)
+    throw error
+  })
+}
+
+// Every
+async.every = function(collection, iterator, callback) {
+  return async
+  .reduce(collection, (trueSoFar, value) => (trueSoFar || iterator(value)), false)
+  .then((result) => (callback ? callback(!!result) : !!result))
   .catch((error) => {
     if (callback) return callback(error)
     throw error

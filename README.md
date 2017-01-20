@@ -41,3 +41,11 @@ async.reduce(collection, reducer)
   .then((result) => console.log(result))
   .catch((err) => console.error(err))
 ```
+
+### Every
+```javascript
+async.every(collection, everyIterator, callback)
+async.every(collection, everyIterator)
+  .then((result) => console.log(result))
+  .catch((err) => console.error(err))
+```

@@ -43,3 +43,12 @@ async.reduce(collection, reducer, (results) => console.log('Reduce callback retu
 async.reduce(collection, reducer)
 .then((results) => console.log('Reduce promise return', results))
 .catch((error) => console.error(error))
+
+
+// EVERY
+collection = { a:1, b:2, c:3, e:5 }
+everyIterator = (value) => Number.isInteger(value)
+
+async.every(collection, everyIterator, (result) => console.log('Every callback return', result))
+async.every(collection, everyIterator)
+  .then((result) => console.log('Every promise return', result))
