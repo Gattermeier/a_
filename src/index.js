@@ -158,6 +158,17 @@ async.reduce = function(collection, reducer, accumulator, callback) {
 // Every
 async.every = function(collection, iterator, callback) {
   return async
+  .reduce(collection, (trueSoFar, value) => (trueSoFar || iterator(value)), true)
+  .then((result) => (callback ? callback(!!result) : !!result))
+  .catch((error) => {
+    if (callback) return callback(error)
+    throw error
+  })
+}
+
+// Some
+async.some = function(collection, iterator, callback) {
+  return async
   .reduce(collection, (trueSoFar, value) => (trueSoFar || iterator(value)), false)
   .then((result) => (callback ? callback(!!result) : !!result))
   .catch((error) => {
