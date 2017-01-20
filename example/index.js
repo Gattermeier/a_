@@ -28,19 +28,18 @@ async.filter(collection, filterTest)
 // REDUCE
 collection = { a:1, b:2, c:3, e:5 }
 const reducer = function(acc, val) {
-  console.log('reducer function:', acc, val)
   return acc + val
 }
 
 // case: collection, reducer, accumulator, callback
-async.reduce(collection, reducer, 0, (results) => console.log('Filter callback return', results))
+async.reduce(collection, reducer, 0, (results) => console.log('Reduce callback return', results))
 // case: collection, reducer, accumulator
 async.reduce(collection, reducer, 0)
-  .then((results) => console.log('Filter promise return', results))
+  .then((results) => console.log('Reduce promise return', results))
   .catch((error) => console.error(error))
 // case: collection, reducer, callback
-async.reduce(collection, reducer, (results) => console.log('Filter callback return', results))
+async.reduce(collection, reducer, (results) => console.log('Reduce callback return', results))
 // case: collection, reducer
 async.reduce(collection, reducer)
-.then((results) => console.log('Filter promise return', results))
+.then((results) => console.log('Reduce promise return', results))
 .catch((error) => console.error(error))
