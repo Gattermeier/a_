@@ -47,6 +47,14 @@ _.filter(collection, test)
   .catch((err) => console.error(err))
 ```
 
+### Reject
+```javascript
+_.reject(collection, test, callback)
+_.reject(collection, test)
+  .then((result) => console.log(result))
+  .catch((err) => console.error(err))
+```
+
 ### Reduce
 ```javascript
 _.reduce(collection, reducer, accumulator, callback)
