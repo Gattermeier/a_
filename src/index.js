@@ -9,17 +9,17 @@
   The async implementations of the utility functions below work similar to underscore's implementations,
   but accept a callback or return a promise alternatively:
 
-  async.each(collection, iterator, callback)
-  async.map(collection, iterator)
+  _.each(collection, iterator, callback)
+  _.map(collection, iterator)
   .then((result) => console.log(result))
   .catch((err) => console.error(err))
 
  */
 
-const async = {}
+const _ = {}
 
 // Each
-async.each = (collection, iterator, callback) => {
+_.each = (collection, iterator, callback) => {
   return new Promise((resolve, reject) => {
     if (Array.isArray(collection)) {
       let i = 0
@@ -60,10 +60,10 @@ async.each = (collection, iterator, callback) => {
 }
 
 // Filter
-async.filter = (collection, test, callback) => {
+_.filter = (collection, test, callback) => {
   var results = []
   return new Promise((resolve, reject) => {
-    return async.each(collection, (element) => {
+    return _.each(collection, (element) => {
       if (test(element)) results.push(element)
     }, () => resolve(results))
   })
@@ -75,7 +75,7 @@ async.filter = (collection, test, callback) => {
 }
 
 // Map
-async.map = (collection, iterator, callback) => {
+_.map = (collection, iterator, callback) => {
   let results = []
   return new Promise((resolve, reject) => {
     if (Array.isArray(collection)) {
@@ -118,7 +118,7 @@ async.map = (collection, iterator, callback) => {
 
 // Reduce
 // arrow fn will not work for getting the right fn arguments
-async.reduce = function(collection, reducer, accumulator, callback) {
+_.reduce = function(collection, reducer, accumulator, callback) {
   var args = [...arguments];
   var initialize = false
 
@@ -140,7 +140,7 @@ async.reduce = function(collection, reducer, accumulator, callback) {
   // 3 arguments, and 3rd is not a function (the accumulator)
   // 4 arguments, both accumulator and callback
 
-  return async.each(collection, function(value) {
+  return _.each(collection, function(value) {
     if (initialize) {
       accumulator = value
       initialize = false
@@ -156,8 +156,8 @@ async.reduce = function(collection, reducer, accumulator, callback) {
 }
 
 // Every
-async.every = function(collection, iterator, callback) {
-  return async
+_.every = function(collection, iterator, callback) {
+  return _
   .reduce(collection, (trueSoFar, value) => (trueSoFar && iterator(value)), true)
   .then((result) => (callback ? callback(!!result) : !!result))
   .catch((error) => {
@@ -167,8 +167,8 @@ async.every = function(collection, iterator, callback) {
 }
 
 // Some
-async.some = function(collection, iterator, callback) {
-  return async
+_.some = function(collection, iterator, callback) {
+  return _
   .reduce(collection, (trueSoFar, value) => (trueSoFar || iterator(value)), false)
   .then((result) => (callback ? callback(!!result) : !!result))
   .catch((error) => {
@@ -177,4 +177,4 @@ async.some = function(collection, iterator, callback) {
   })
 }
 
-module.exports = async
+module.exports = _

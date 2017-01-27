@@ -1,0 +1,30 @@
+{
+  "name": "a_",
+  "version": "0.0.1",
+  "description": "Non-blocking, asynchronous helper functions for Node.js",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gattermeier/a_.git"
+  },
+  "keywords": [
+    "util",
+    "functional",
+    "async",
+    "asynchronous",
+    "utility",
+    "node"
+  ],
+  "author": "Matthias Gattermeier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Gattermeier/a_/issues"
+  },
+  "homepage": "https://github.com/Gattermeier/a_#readme"
+}
