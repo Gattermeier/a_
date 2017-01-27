@@ -7,9 +7,9 @@ Besides spawning child processes, using web workers, etc it makes sense to avoid
 
 ## Usage
 
-Install with npm: `npm i -S a_`
-Run unit tests with: `npm test`
-Use in your project:
+Install with npm: `npm i -S a_`   
+Run unit tests with: `npm test`   
+Use in your project:    
 ```javascript
 import _ from 'a_'
 // or
