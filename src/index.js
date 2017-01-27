@@ -8,6 +8,6 @@ _.map = require('./map')
 _.reduce = require('./reduce')
 _.every = require('./every')
 _.some = require('./some')
-
+_.dropWhile = require('./dropWhile')
 
 module.exports = _
