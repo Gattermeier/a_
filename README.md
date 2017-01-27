@@ -5,6 +5,19 @@ For large collections and calculation intensive operations functions such as `ea
 provided by utility libraries like underscore or lodash can monopolize the CPU, blocking Node's event loop.    
 Besides spawning child processes, using web workers, etc it makes sense to avoid synchronous fns.    
 
+## Usage
+
+Install with npm: `npm i -S a_`
+Run unit tests with: `npm test`
+Use in your project:
+```javascript
+import _ from 'a_'
+// or
+const _ = require('a_')
+```
+
+## Available Functions
+
 The _ implementations here work similar to underscore's implementations,    
 but accept a callback or return a promise alternatively:
 
