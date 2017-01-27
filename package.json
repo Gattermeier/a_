@@ -7,7 +7,7 @@
     "example": "example"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "lab"
   },
   "repository": {
     "type": "git",
@@ -26,5 +26,12 @@
   "bugs": {
     "url": "https://github.com/Gattermeier/a_/issues"
   },
-  "homepage": "https://github.com/Gattermeier/a_#readme"
+  "homepage": "https://github.com/Gattermeier/a_#readme",
+  "engines": {
+    "node": ">=6.2.0"
+  },
+  "devDependencies": {
+    "code": "^4.0.0",
+    "lab": "^12.1.0"
+  }
 }
