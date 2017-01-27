@@ -1,4 +1,5 @@
 # Non-blocking utils functions for CPU-bound Node processes
+[![Build Status](https://travis-ci.org/Gattermeier/a_.svg?branch=master)](https://travis-ci.org/Gattermeier/a_)
 
 Node.js is (sorta) single threaded and optimized for I/O not CPU bound operations.    
 For large collections and calculation intensive operations functions such as `each` or `map`    
