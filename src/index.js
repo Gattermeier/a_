@@ -11,5 +11,6 @@ _.some = _.any = require('./some')
 _.dropWhile = require('./dropWhile')
 _.eachUntil = require('./eachUntil')
 _.eachWhile = require('./eachWhile')
+_.find = require('./find')
 
 module.exports = _
