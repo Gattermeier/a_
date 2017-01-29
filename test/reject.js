@@ -15,24 +15,44 @@ const _ = require('../src/index');
 
 const options = { parallel: true }
 
-experiment('# Reject over collection ', options, () => {
-    test('should return resutls correctly with promise', options, () => {
-      let collection = { a:1, b:2, c:3, d:'string' }
-      let iterator = (value, index, collection) =>  Number.isInteger(value)
+experiment('# Reject  ', options, () => {
+  test('should return results correctly over collection with promise', options, () => {
+    let collection = { a:1, b:2, c:3, d:'string' }
+    let iterator = (value, index, collection) =>  Number.isInteger(value)
 
-      return _.reject(collection, iterator)
-        .then((result) => {
-          expect(result).to.equal(['string']);
-        })
-    });
-
-    test('should return results correctly with callbacks', options, () => {
-      let collection = { a:1, b:2, c:3, d:'string' }
-      let iterator = (value, index, collection) => Number.isInteger(value)
-      let cb = (result, err) => {
+    return _.reject(collection, iterator)
+      .then((result) => {
         expect(result).to.equal(['string']);
-      }
+      })
+  });
 
-      return _.reject(collection, iterator, cb)
-    });
-  })
+  test('should return results correctly over collection with callbacks', options, () => {
+    let collection = { a:1, b:2, c:3, d:'string' }
+    let iterator = (value, index, collection) => Number.isInteger(value)
+    let cb = (result, err) => {
+      expect(result).to.equal(['string']);
+    }
+
+    return _.reject(collection, iterator, cb)
+  });
+
+  test('should return results correctly over array with promise', options, () => {
+    let arr = [1,2,3,'string']
+    let iterator = (value, index, arr) =>  Number.isInteger(value)
+
+    return _.reject(arr, iterator)
+      .then((result) => {
+        expect(result).to.equal(['string']);
+      })
+  });
+
+  test('should return results correctly over array with callbacks', options, () => {
+    let arr = [1,2,3,'string']
+    let iterator = (value, index, arr) => Number.isInteger(value)
+    let cb = (result, err) => {
+      expect(result).to.equal(['string']);
+    }
+
+    return _.reject(arr, iterator, cb)
+  });
+})

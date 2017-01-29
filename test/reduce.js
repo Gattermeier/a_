@@ -15,8 +15,8 @@ const _ = require('../src/index');
 
 const options = { parallel: true }
 
-experiment('# Reduce over collection ', options, () => {
-  test('should reduce correctly using promise with accumulator passed', options, () => {
+experiment('# Reduce ', options, () => {
+  test('should reduce over collection correctly using promise with accumulator passed', options, () => {
     let collection = { a: 1, b: 2, c: 3, d: 4 }
     let iterator = (value, index, collection) => Number.isInteger(value)
     const reducer = (acc, val) => acc + val
@@ -26,7 +26,7 @@ experiment('# Reduce over collection ', options, () => {
         expect(result).to.equal(11);
       })
   });
-  test('should reduce correctly using promise without accumulator passed', options, () => {
+  test('should reduce over collection correctly using promise without accumulator passed', options, () => {
     let collection = { a: 1, b: 2, c: 3, d: 4 }
     let iterator = (value, index, collection) => Number.isInteger(value)
     const reducer = (acc, val) => acc + val
@@ -36,7 +36,7 @@ experiment('# Reduce over collection ', options, () => {
         expect(result).to.equal(10);
       })
   });
-  test('should reduce correctly using callback with accumulator passed', options, () => {
+  test('should reduce over collection correctly using callback with accumulator passed', options, () => {
     let collection = { a: 1, b: 2, c: 3, d: 4 }
     let iterator = (value, index, collection) => Number.isInteger(value)
     const reducer = (acc, val) => acc + val
@@ -45,7 +45,7 @@ experiment('# Reduce over collection ', options, () => {
     }
     return _.reduce(collection, reducer, 1, cb)
   });
-  test('should reduce correctly using promise without accumulator passed', options, () => {
+  test('should reduce over collection correctly using promise without accumulator passed', options, () => {
     let collection = { a: 1, b: 2, c: 3, d: 4 }
     let iterator = (value, index, collection) => Number.isInteger(value)
     const reducer = (acc, val) => acc + val
@@ -53,5 +53,43 @@ experiment('# Reduce over collection ', options, () => {
       expect(result).to.equal(10);
     }
     return _.reduce(collection, reducer, cb)
+  });
+  test('should reduce over array correctly using promise with accumulator passed', options, () => {
+    let arr = [1,2,3,4]
+    let iterator = (value, index, arr) => Number.isInteger(value)
+    const reducer = (acc, val) => acc + val
+
+    return _.reduce(arr, reducer, 1)
+      .then((result) => {
+        expect(result).to.equal(11);
+      })
+  });
+  test('should reduce over array correctly using promise without accumulator passed', options, () => {
+    let arr = [1,2,3,4]
+    let iterator = (value, index, arr) => Number.isInteger(value)
+    const reducer = (acc, val) => acc + val
+
+    return _.reduce(arr, reducer)
+      .then((result) => {
+        expect(result).to.equal(10);
+      })
+  });
+  test('should reduce over array correctly using callback with accumulator passed', options, () => {
+    let arr = [1,2,3,4]
+    let iterator = (value, index, arr) => Number.isInteger(value)
+    const reducer = (acc, val) => acc + val
+    let cb = (result, err) => {
+      expect(result).to.equal(11);
+    }
+    return _.reduce(arr, reducer, 1, cb)
+  });
+  test('should reduce over array correctly using promise without accumulator passed', options, () => {
+    let arr = [1,2,3,4]
+    let iterator = (value, index, arr) => Number.isInteger(value)
+    const reducer = (acc, val) => acc + val
+    let cb = (result, err) => {
+      expect(result).to.equal(10);
+    }
+    return _.reduce(arr, reducer, cb)
   });
 })
