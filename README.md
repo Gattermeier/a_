@@ -93,6 +93,15 @@ _.some(collection, test)
   .catch((err) => console.error(err))
 ```
 
+## EachUntil
+Iterates over collection until iterator first returns truthy, returns index or key for value for which iterator returned truthy.    
+```javascript
+_.eachUntil(collection, test, callback)
+_.eachUntil(collection, test)
+  .then((result) => console.log(result))
+  .catch((err) => console.error(err))
+```
+
 ## Contributing
 
 In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code.
