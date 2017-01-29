@@ -15,12 +15,12 @@ const _ = require('../src/index');
 
 const options = { parallel: true }
 
-experiment('# EachUntil  ', options, () => {
-    test('should iterate correctly until iterator returns truthy and return key in collection with promise', options, () => {
+experiment('# EachWhile  ', options, () => {
+    test('should iterate correctly until iterator returns falsey and return key in collection with promise', options, () => {
       let collection = { a:1, b:2, c:3 }
-      let iterator = (value, index, collection) => (value === 2)
+      let iterator = (value, index, collection) => (value === 1)
 
-      return _.eachUntil(collection, iterator)
+      return _.eachWhile(collection, iterator)
         .then((key) => {
           expect(key).to.equal('b');
         })
@@ -28,9 +28,9 @@ experiment('# EachUntil  ', options, () => {
 
     test('should iterate correctly over collection until end and return undefined with promise', options, () => {
       let collection = { a:1, b:2, c:3 }
-      let iterator = (value, index, collection) => (value === 4)
+      let iterator = (value, index, collection) => Number.isInteger(value)
 
-      return _.eachUntil(collection, iterator)
+      return _.eachWhile(collection, iterator)
         .then((key) => {
           expect(key).to.equal(undefined);
         })
@@ -38,28 +38,28 @@ experiment('# EachUntil  ', options, () => {
 
     test('should iterate correctly until iterator returns truthy and return key in collection with callbacks', options, () => {
       let collection = { a:1, b:2, c:3 }
-      let iterator = (value, index, collection) => (value === 3)
+      let iterator = (value, index, collection) => (value === 1)
       let cb = (key) => {
-        expect(key).to.equal('c');
+        expect(key).to.equal('b');
       }
 
-      return _.eachUntil(collection, iterator, cb)
+      return _.eachWhile(collection, iterator, cb)
     });
 
     test('should iterate correctly over collection until end and return undefined with callback', options, () => {
       let collection = { a:1, b:2, c:3 }
-      let iterator = (value, index, collection) => (value === 4)
+      let iterator = (value, index, collection) => Number.isInteger(value)
       let cb = (key) => {
         expect(key).to.equal(undefined);
       }
-      return _.eachUntil(collection, iterator)
+      return _.eachWhile(collection, iterator)
     });
 
     test('should iterate correctly until iterator returns truthy and return index of array with promise', options, () => {
       let arr = [1,2,3]
-      let iterator = (value, index, arr) => (value === 2)
+      let iterator = (value, index, arr) => (value === 1)
 
-      return _.eachUntil(arr, iterator)
+      return _.eachWhile(arr, iterator)
         .then((key) => {
           expect(key).to.equal(1);
         })
@@ -67,9 +67,9 @@ experiment('# EachUntil  ', options, () => {
 
     test('should iterate correctly over array until end and return undefined with promise', options, () => {
       let arr = [1,2,3]
-      let iterator = (value, index, arr) => (value === 4)
+      let iterator = (value, index, arr) => Number.isInteger(value)
 
-      return _.eachUntil(arr, iterator)
+      return _.eachWhile(arr, iterator)
         .then((key) => {
           expect(key).to.equal(undefined);
         })
@@ -77,20 +77,20 @@ experiment('# EachUntil  ', options, () => {
 
     test('should iterate correctly until iterator returns truthy and return index of array with callbacks', options, () => {
       let arr = [1,2,3]
-      let iterator = (value, index, arr) => (value === 3)
+      let iterator = (value, index, arr) => (value === 1)
       let cb = (key) => {
-        expect(key).to.equal(2);
+        expect(key).to.equal(1);
       }
 
-      return _.eachUntil(arr, iterator, cb)
+      return _.eachWhile(arr, iterator, cb)
     });
 
     test('should iterate correctly over array until end and return undefined with callback', options, () => {
       let arr = [1,2,3]
-      let iterator = (value, index, arr) => (value === 4)
+      let iterator = (value, index, arr) => Number.isInteger(value)
       let cb = (key) => {
         expect(key).to.equal(undefined);
       }
-      return _.eachUntil(arr, iterator)
+      return _.eachWhile(arr, iterator)
     });
   })

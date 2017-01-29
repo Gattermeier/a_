@@ -10,5 +10,6 @@ _.every = _.all = require('./every')
 _.some = _.any = require('./some')
 _.dropWhile = require('./dropWhile')
 _.eachUntil = require('./eachUntil')
+_.eachWhile = require('./eachWhile')
 
 module.exports = _
