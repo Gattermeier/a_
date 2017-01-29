@@ -111,6 +111,14 @@ _.eachWhile(collection, test)
   .catch((err) => console.error(err))
 ```
 
+## Find
+Iterates over collection and returns first item to be found returning truthy on the iterator function.
+```javascript
+_.find(collection, iterator, callback)
+_.find(collection, iterator)
+  .then((result) => console.log(result))
+  .catch((err) => console.error(err))
+```
 
 ## Contributing
 
