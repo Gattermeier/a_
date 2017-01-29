@@ -15,8 +15,8 @@ const _ = require('../src/index');
 
 const options = { parallel: true }
 
-experiment('# Each over collection ', options, () => {
-    test('should iterate correctly with promise', options, () => {
+experiment('# Each # ', options, () => {
+    test('should iterate correctly over collection with promise', options, () => {
       let result = 0
       let collection = { a:1, b:2, c:3 }
       let iterator = (value, index, collection) => (result += value )
@@ -27,7 +27,7 @@ experiment('# Each over collection ', options, () => {
         })
     });
 
-    test('should iterate correctly with callbacks', options, () => {
+    test('should iterate correctly over collection with callbacks', options, () => {
       let result = 0
       let collection = { a:1, b:2, c:3 }
       let iterator = (value, index, collection) => (result += value )
@@ -36,5 +36,27 @@ experiment('# Each over collection ', options, () => {
       }
 
       return _.each(collection, iterator, cb)
+    });
+
+    test('should iterate correctly over array with promise', options, () => {
+      let result = 0
+      let arr = [1,2,3]
+      let iterator = (value, index, arr) => (result += value )
+
+      return _.each(arr, iterator)
+        .then(() => {
+          expect(result).to.equal(6);
+        })
+    });
+
+    test('should iterate correctly over array with callbacks', options, () => {
+      let result = 0
+      let arr = [1,2,3]
+      let iterator = (value, index, arr) => (result += value )
+      let cb = (data) => {
+        expect(result).to.equal(6);
+      }
+
+      return _.each(arr, iterator, cb)
     });
   })
