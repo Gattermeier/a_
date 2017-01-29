@@ -15,8 +15,8 @@ const _ = require('../src/index');
 
 const options = { parallel: true }
 
-experiment('# Filter over collection ', options, () => {
-    test('should iterate correctly with promise', options, () => {
+experiment('# Filter ', options, () => {
+    test('should iterate correctly over collection with promise', options, () => {
       let collection = { a:1, b:2, c:3, d:'string' }
       let iterator = (value, index, collection) => Number.isInteger(value)
 
@@ -26,7 +26,7 @@ experiment('# Filter over collection ', options, () => {
         })
     });
 
-    test('should iterate correctly with callbacks', options, () => {
+    test('should iterate correctly over collection with callbacks', options, () => {
       let collection = { a:1, b:2, c:3, d:'string' }
       let iterator = (value, index, collection) => Number.isInteger(value)
       let cb = (result, err) => {
@@ -34,5 +34,25 @@ experiment('# Filter over collection ', options, () => {
       }
 
       return _.filter(collection, iterator, cb)
+    });
+
+    test('should iterate correctly over array with promise', options, () => {
+      let arr = [1,2,3,'string']
+      let iterator = (value, index, arr) => Number.isInteger(value)
+
+      return _.filter(arr, iterator)
+        .then((result) => {
+          expect(result).to.equal([1,2,3]);
+        })
+    });
+
+    test('should iterate correctly over array with callbacks', options, () => {
+      let arr = [1,2,3,'string']
+      let iterator = (value, index, arr) => Number.isInteger(value)
+      let cb = (result, err) => {
+        expect(result).to.equal([1,2,3]);
+      }
+
+      return _.filter(arr, iterator, cb)
     });
   })
