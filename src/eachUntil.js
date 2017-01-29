@@ -14,7 +14,7 @@ module.exports = (collection, iterator, callback) => {
           }
           i++
           setImmediate(iter)
-        } else resolve(!!until && i || undefined);
+        } else resolve(!!until && (i - 1) || undefined);
       }
       iter();
     } else {
