@@ -14,7 +14,7 @@ module.exports = (collection, iterator, callback) => {
           }
           i++
           setImmediate(iter)
-        } else resolve(i || undefined);
+        } else resolve(!!until && i || undefined);
       }
       iter();
     } else {
@@ -30,8 +30,7 @@ module.exports = (collection, iterator, callback) => {
           }
           setImmediate(iter)
         } else {
-          console.log('until', until, key, key|| undefined)
-          resolve(key || undefined)
+          resolve(!!until && key || undefined)
         }
       }
       iter()

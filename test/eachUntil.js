@@ -15,7 +15,7 @@ const _ = require('../src/index');
 
 const options = { parallel: true }
 
-experiment.only('# EachUntil over collection ', options, () => {
+experiment('# EachUntil over collection ', options, () => {
     test('should iterate correctly until iterator returns truthy and return key in collection with promise', options, () => {
       let collection = { a:1, b:2, c:3 }
       let iterator = (value, index, collection) => (value === 2)
@@ -25,7 +25,7 @@ experiment.only('# EachUntil over collection ', options, () => {
           expect(key).to.equal('b');
         })
     });
-    
+
     test('should iterate correctly over collection until end and return undefined with promise', options, () => {
       let collection = { a:1, b:2, c:3 }
       let iterator = (value, index, collection) => (value === 4)
@@ -43,7 +43,7 @@ experiment.only('# EachUntil over collection ', options, () => {
         expect(key).to.equal('c');
       }
 
-      return _.each(collection, iterator, cb)
+      return _.eachUntil(collection, iterator, cb)
     });
 
     test('should iterate correctly over collection until end and return undefined with callback', options, () => {
