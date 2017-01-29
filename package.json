@@ -1,6 +1,6 @@
 {
   "name": "a_",
-  "version": "0.1.1",
+  "version": "0.2.1",
   "description": "Non-blocking, asynchronous helper functions for Node.js",
   "main": "src/index.js",
   "directories": {
