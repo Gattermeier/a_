@@ -1,8 +1,9 @@
 # Non-blocking utils functions for CPU-bound Node processes
 [![Build Status](https://travis-ci.org/Gattermeier/a_.svg?branch=master)](https://travis-ci.org/Gattermeier/a_)
+[![Coverage Status](https://coveralls.io/repos/github/Gattermeier/a_/badge.svg?branch=master)](https://coveralls.io/github/Gattermeier/a_?branch=master)
 
 Node.js is (sorta) single threaded and optimized for I/O not CPU bound operations.    
-For large collections and calculation intensive operations functions such as `each` or `map`    
+For large collections and calculation intensive operations using functions such as `each`, `map`, `reduce`    
 provided by utility libraries like underscore or lodash can monopolize the CPU, blocking Node's event loop.    
 Besides spawning child processes, using web workers, etc it makes sense to avoid synchronous fns.    
 
